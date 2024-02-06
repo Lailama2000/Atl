@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { HelmetProvider } from 'react-helmet-async';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import { createTheme , ThemeProvider} from '@mui/material';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import MainPage from './Pages/MainPage';
+import PrivacyPolicy from './Pages/PrivacyPolicy';
+import Terms from './Pages/Terms';
 
 function App() {
+  const theme = createTheme({
+    typography: {
+      fontFamily: 'Noto Kufi Arabic',
+    }
+  });
+  const navbarHeight = 60;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <HelmetProvider>
+        <HashRouter>
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <Routes>
+        <Route path="/" element= {<MainPage navbarHeight={navbarHeight}/>}/>
+        <Route path="/PrivacyPolicy" element= {<PrivacyPolicy navbarHeight={navbarHeight}/>}/>
+        <Route path="/Terms" element= {<Terms navbarHeight={navbarHeight}/>}/>
+        </Routes>
+          <Footer />
+        </ThemeProvider>
+        </HashRouter>
+      </HelmetProvider>
     </div>
   );
 }
