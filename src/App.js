@@ -1,6 +1,6 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import { createTheme , ThemeProvider} from '@mui/material';
+import { Button, createTheme , ThemeProvider} from '@mui/material';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import MainPage from './Pages/MainPage';
@@ -10,7 +10,10 @@ import Terms from './Pages/Terms';
 function App() {
   const theme = createTheme({
     typography: {
-      fontFamily: 'Noto Kufi Arabic',
+      fontFamily: 'Helvetica Neue',
+    },
+    Button:{
+      fontFamily: 'Helvetica Neue',
     }
   });
   const navbarHeight = 60;
@@ -22,8 +25,8 @@ function App() {
           <Navbar />
           <Routes>
         <Route path="/" element= {<MainPage navbarHeight={navbarHeight}/>}/>
-        <Route path="/PrivacyPolicy" element= {<PrivacyPolicy navbarHeight={navbarHeight}/>}/>
-        <Route path="/Terms" element= {<Terms navbarHeight={navbarHeight}/>}/>
+        <Route path="/privacypolicy" element= {<PrivacyPolicy navbarHeight={navbarHeight}/>}/>
+        <Route path="/terms" element= {<Terms navbarHeight={navbarHeight}/>}/>
         </Routes>
           <Footer />
         </ThemeProvider>

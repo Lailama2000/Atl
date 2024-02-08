@@ -17,18 +17,32 @@ import { useMediaQuery } from '@mui/material';
 import LanguageIcon from '@mui/icons-material/Language';
 import { useTranslation } from 'react-i18next';
 import i18next from "i18next";
+import axios from 'axios';
+import {  Link } from '@mui/material'
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [contact, setContact] = React.useState({});
   const matches = useMediaQuery('(min-width:1200px)');
   const [langMenu,setLangMenu]=React.useState(null)
   const { t , i18n } = useTranslation();
   const dir = i18n.dir();
   document.body.dir = i18n.dir();
   const pages = [t('Home'), t('What ATL?'), t('Our Services'), t('Become a Tutor'), t('FAQs')];
+  const lang = localStorage.getItem('lang')
 
+  React.useEffect(()=>{
+    axios.get(`${process.env.REACT_APP_API_URL}home-page`, {
+      headers: {
+        lang : lang
+      },
+    }).then(res=>{
+      setContact(res.data.data.general)
+    })
+  },[])
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -83,7 +97,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              <img src={logo} alt="...loading" style={{ width: '60px', height: '60px' }} />
+              <img src={logo} alt="...loading" style={{ width: '60px', height: '60px',objectFit:'contain' }} />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
@@ -211,14 +225,27 @@ function Navbar() {
                     borderRadius: '20px',
                     marginLeft: '40px',
                     '&:hover':{bgcolor: '#018EA2',
-                    color: 'white',}
+                    color: 'white',},textTransform:'none'
                   }}
                 >
                   {t('Get In Touch!')}
                 </Button>
-                <FacebookIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+                <Link href={contact.facebook}>
+                <FacebookIcon 
+                sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+                </Link>
+                {contact.instagram ?<Link href={contact.instagram}>
                 <InstagramIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+                </Link> : null}
+                {contact.linkedin ?
+        <Link href={contact.linkedin}>
+        <LinkedInIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+        </Link> : null }
+                {contact.whatsapp ?<Link href={contact.instagram}>
                 <WhatsAppIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+                </Link> : null}
+
+
                 <a onClick={()=>{setLangMenu(!langMenu)}}>
                 <LanguageIcon sx={{ cursor: 'pointer', color: '#606060', m:'0px' }} /> 
                 </a>

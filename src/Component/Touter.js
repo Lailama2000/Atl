@@ -18,7 +18,7 @@ export default function Touter() {
         Ready to share your expertise and inspire students? Become a tutor with ATL Education today! Fill out our simple form to join our team of dedicated educators and help shape the future of learning.
         </Typography>
         <Button sx={{bgcolor:'#7D4896',color:'white',marginTop:'50px','&:hover':{bgcolor:'#7D4896',color:'white'},
-            padding:'10px',width:matches?'250px':'150px',fontWeight:'bold'}}>
+            padding:'10px',width:matches?'250px':'150px',fontWeight:'bold',textTransform:'none',fontSize:'16px'}}>
         Fill the form in seconds!
         </Button>
         <img src={pic2} style={{width:'200px',height:'120px',position:'relative',

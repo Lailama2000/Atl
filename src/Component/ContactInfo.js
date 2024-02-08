@@ -9,19 +9,19 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { useTranslation } from 'react-i18next';
 
-export default function ContactInfo() {
+export default function ContactInfo({contact}) {
   const[about,setAbout]=useState({})
   const lang = localStorage.getItem('lang')
   const matches = useMediaQuery('(min-width:960px)');
   const { t } = useTranslation();
  
   const handleMailClick = () => {
-    window.open(`mailto:${about.email}`);
+    window.open(`mailto:${contact.email}`);
   };
   return (
     <div >
       <Stack sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start',marginTop:matches?'90px':'10px'}} gap={3}>
-        <Link href="tel:65" style={{textDecoration: 'none'}}>
+        <Link href={`tel:${contact.phone_number}`} style={{textDecoration: 'none'}}>
           <Stack direction='row' gap={2} sx={{cursor:'pointer'}}> 
           <PhoneIcon sx={{bgcolor:'#7D4896' , color:'white' , borderRadius:'30px',padding:'10px','&:hover':{bgcolor:'#FECD2B',transition:'0.3s ease-in'}}}/>
         <Stack sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
@@ -29,7 +29,7 @@ export default function ContactInfo() {
           {t('Phone Number')}
         </Typography>
         <Typography sx={{fontSize:'12px',color:'#018EA2',textDecoration: 'none','&:hover':{textDecoration:'underline'}}}>
-          65
+          {contact.phone_number}
         </Typography>
         </Stack>
         </Stack>
@@ -45,12 +45,12 @@ export default function ContactInfo() {
           {t('Email')}
         </Typography>
         <Typography sx={{fontSize:'12px',color:'#018EA2','&:hover':{textDecoration:'underline'}}}>
-        Info@smartedge.com
+        {contact.email}
         </Typography>
         </Stack>
         </Stack>
 
-
+        {contact.location ?
         <Stack direction='row' gap={2} sx={{cursor:'pointer'}}> 
         <LocationOnIcon sx={{bgcolor:'#7D4896' , color:'white' , borderRadius:'30px',padding:'10px','&:hover':{bgcolor:'#FECD2B',transition:'0.3s ease-in'}}}/>
         <Stack sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
@@ -58,29 +58,30 @@ export default function ContactInfo() {
           {t('Location')}
         </Typography>
         <Typography sx={{fontSize:'12px',color:'#018EA2','&:hover':{textDecoration:'underline'}}}>
-        {t('Amman, Jordan')}
+        {contact.location}
         </Typography>
         </Stack>
         </Stack>
-
+: null}
 
         <Box sx={{justifyContent:'end',alignItems:'end',display:'flex',flexWrap:'wrap'}}>
          <Stack direction='row' gap={2}> 
        
-        <Link href='https://www.google.com'>
+        {contact.instagram ?<Link href={contact.instagram} target="_blank">
         <InstagramIcon sx={{bgcolor:'#7D4896' , color:'white' , borderRadius:'30px','&:hover':{color:'#E9CE6F'}
         ,padding:'10px', cursor:'pointer'}}/>
-        </Link>
+        </Link> :null }
 
-        <Link href='https://www.google.com'>
+        <Link href={contact.facebook} target="_blank">
         <FacebookIcon sx={{bgcolor:'#7D4896' , color:'white' , borderRadius:'30px','&:hover':{color:'#E9CE6F'}
         ,padding:'10px', cursor:'pointer'}}/>
         </Link>
-
-        <Link href='https://www.google.com'>
+        {contact.linkedin ?
+        <Link href={contact.linkedin} target="_blank">
         <LinkedInIcon sx={{bgcolor:'#7D4896' , color:'white' ,'&:hover':{color:'#E9CE6F'},
         borderRadius:'30px',padding:'10px', cursor:'pointer',marginBottom:matches?'':'30px'}}/>
-        </Link>
+        </Link> : null
+      }
         </Stack>
         </Box>
    

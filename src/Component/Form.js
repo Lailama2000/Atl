@@ -48,10 +48,8 @@ export default function Form() {
 
   return (
     <div style={{backgroundColor:'white',marginTop:matches?'90px':'10px' }}>
-        <Typography sx={{ color: '#7D4896', fontSize: '25px', fontWeight: 'bold' }}>{t('Got more questions?')}
-</Typography>
+        <Typography sx={{ color: '#7D4896', fontSize: '25px', fontWeight: 'bolder' ,marginBottom:'40px'}}>{t('Got more questions?')}
         <br />
-        <Typography sx={{ color: '#7D4896', fontSize: '25px', fontWeight: 'bold',marginBottom:'40px' }}>
           {t('Drop us a message!')}
  </Typography>
         <Stack direction={matches ? 'row' : 'column'} gap={2}>
@@ -89,8 +87,8 @@ export default function Form() {
         <Stack direction={matches ? 'row' : 'column'} gap={2} sx={{ marginTop: '20px' }}>
           <Grid>
           <PhoneInput
-          country={'+xxx'}
-          placeholder={t('Phone Number')}
+          country={'jo'}
+          defaultMask='jo'
             enableSearch={true}
             value={phone}
             onChange={setPhone}
@@ -130,7 +128,7 @@ export default function Form() {
         {alerting && <Alert  severity="error" sx={{width:'300px', marginTop: '20px'}}>One of the Feilds is empty</Alert>}
         <Button onClick={handlesend} sx={{
             bgcolor:'#018EA2',color:'white',padding:'10px',width:'150px',marginBottom:'40px',marginTop:'20px',
-            '&:hover':{bgcolor:'#018EA2',color:'white'}
+            '&:hover':{bgcolor:'#018EA2',color:'white'},fontSize:'16px',textTransform:'none'
         }}>{t('Send')}</Button>
     </div>
   );

@@ -24,7 +24,7 @@ export default function Footer() {
           gap={matches ? 15 : 2}
           sx={{display:'flex',flexWrap:'wrap',justifyContent:'center',alignItems:'center'}}
         >
-          <img src={logo} style={{ height: '50px', width: '50px', objectFit: 'fill' }} />
+          <img src={logo} style={{ height: '50px', width: '50px', objectFit: 'contain' }} />
 
           <Typography variant="body2" sx={{ fontSize: '15px' }}>
             {t('CopyRight 2023, All Rights Reserved')}
@@ -33,11 +33,20 @@ export default function Footer() {
           <Typography variant="body2" sx={{ fontSize: '15px' }}>
             <Link
               onClick={() => {
-                navigate('/PrivacyPolicy');
+                navigate('/privacypolicy');
               }}
               sx={{ color: 'white', fontSize: '15px', textDecoration: 'underline', cursor: 'pointer' }}
             >
               {t("Privacy Policy")}
+            </Link>
+            {" "} | {" "}
+            <Link
+              onClick={() => {
+                navigate('/terms');
+              }}
+              sx={{ color: 'white', fontSize: '15px', textDecoration: 'underline', cursor: 'pointer' }}
+            >
+              {t("Terms and Conditions")}
             </Link>
           </Typography>
 
