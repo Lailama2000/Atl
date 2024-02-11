@@ -6,16 +6,20 @@ import Footer from './Footer';
 import MainPage from './Pages/MainPage';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import Terms from './Pages/Terms';
+import { useEffect } from 'react';
+import FormPage from './Pages/FormPage';
+import BlogDetails from './Pages/BlogDetails';
 
 function App() {
   const theme = createTheme({
     typography: {
-      fontFamily: 'Helvetica Neue',
+      fontFamily: 'arial',
     },
     Button:{
-      fontFamily: 'Helvetica Neue',
+      fontFamily: 'arial',
     }
   });
+ 
   const navbarHeight = 60;
   return (
     <div>
@@ -27,6 +31,8 @@ function App() {
         <Route path="/" element= {<MainPage navbarHeight={navbarHeight}/>}/>
         <Route path="/privacypolicy" element= {<PrivacyPolicy navbarHeight={navbarHeight}/>}/>
         <Route path="/terms" element= {<Terms navbarHeight={navbarHeight}/>}/>
+        <Route path="/form" element= {<FormPage navbarHeight={navbarHeight}/>}/>
+        <Route path="/blogdetails" element= {<BlogDetails navbarHeight={navbarHeight}/>}/>
         </Routes>
           <Footer />
         </ThemeProvider>

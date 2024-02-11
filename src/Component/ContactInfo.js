@@ -19,7 +19,7 @@ export default function ContactInfo({contact}) {
     window.open(`mailto:${contact.email}`);
   };
   return (
-    <div >
+    <div id='contact'>
       <Stack sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start',marginTop:matches?'90px':'10px'}} gap={3}>
         <Link href={`tel:${contact.phone_number}`} style={{textDecoration: 'none'}}>
           <Stack direction='row' gap={2} sx={{cursor:'pointer'}}> 
@@ -64,7 +64,7 @@ export default function ContactInfo({contact}) {
         </Stack>
 : null}
 
-        <Box sx={{justifyContent:'end',alignItems:'end',display:'flex',flexWrap:'wrap'}}>
+        <Box sx={{justifyContent:'end',alignItems:'end',display:'flex',flexWrap:'wrap',marginBottom:matches?'':'50px'}}>
          <Stack direction='row' gap={2}> 
        
         {contact.instagram ?<Link href={contact.instagram} target="_blank">
@@ -79,7 +79,7 @@ export default function ContactInfo({contact}) {
         {contact.linkedin ?
         <Link href={contact.linkedin} target="_blank">
         <LinkedInIcon sx={{bgcolor:'#7D4896' , color:'white' ,'&:hover':{color:'#E9CE6F'},
-        borderRadius:'30px',padding:'10px', cursor:'pointer',marginBottom:matches?'':'30px'}}/>
+        borderRadius:'30px',padding:'10px', cursor:'pointer'}}/>
         </Link> : null
       }
         </Stack>

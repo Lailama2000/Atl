@@ -2,17 +2,20 @@ import React from 'react';
 import pic from '../Media/Group 9671.png';
 import { Stack, Typography, useMediaQuery } from '@mui/material';
 import pic2 from '../Media/Group 9660.png';
+import { useTranslation } from 'react-i18next';
 
 export default function WhyUs({whyUs}) {
   const matches = useMediaQuery('(min-width:711px)');
   const lang = localStorage.getItem('lang');
+  const { t } = useTranslation();
 
   return (
-    <div style={{ backgroundColor: '#7D4896', position: 'relative', minHeight: '550px',height:whyUs.length > 3 ?'':'650px' }}>
+    <div id={t('What ATL?')}
+    style={{ backgroundColor: '#7D4896', position: 'relative', minHeight: '550px',height:whyUs.length > 3 ?'':'650px' }}>
       <Stack sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', alignItems: 'start', padding: '50px' }}>
         <Typography sx={{ color: '#F5C660', fontSize: '40px', fontWeight: 'bold', marginBottom: '40px' }}>
-          What makes <br />
-          ATL Different?
+          {t('What makes')} <br />
+          {t('ATL Different?')}
         </Typography>
         <img
           src={pic}
@@ -20,8 +23,8 @@ export default function WhyUs({whyUs}) {
             height: '550px',
             width: '250px',
             position: 'absolute',
-            right: lang ==='ar' ? '' : '0px',
-            left: lang ==='ar' ? '0px' : '',
+            right: lang === 'en' ? '0px' : '',
+            left: lang === 'ar' ? '0px' : '',
             top: '7%',
             transform: lang ==='ar' ? 'scaleX(-1)' : '',
           }}

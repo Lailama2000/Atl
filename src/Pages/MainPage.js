@@ -37,7 +37,7 @@ export default function MainPage({navbarHeight}) {
     },[])
 
   return (
-    <div style={{marginTop:`150px`}}>
+    <div style={{marginTop:`100px`}}>
        {open && <LoadingPage open={open} />}
        {!open &&<>
       <Sliders slider={slider} />

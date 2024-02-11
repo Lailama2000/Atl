@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.41d144ce.css",
+    "main.js": "/static/js/main.93984c1d.js",
+    "static/js/592.0f886a15.chunk.js": "/static/js/592.0f886a15.chunk.js",
+    "static/media/Terms.png": "/static/media/Terms.a67dbbe012ce97ab97d3.png",
+    "static/media/Rectangle.png": "/static/media/Rectangle.c160c5541458daf2f790.png",
+    "static/media/young-tender-curly-girl-holding-documents.png": "/static/media/young-tender-curly-girl-holding-documents.e0e31dcb1609718605fa.png",
+    "static/media/Rectangle 898.png": "/static/media/Rectangle 898.210a0b19c4e83b2ba308.png",
+    "static/media/woman-white-blouse-standing-with-books.png": "/static/media/woman-white-blouse-standing-with-books.19c2b6ed923270ddba30.png",
+    "static/media/Group 9671.png": "/static/media/Group 9671.3aecc35292d2574dbc8e.png",
+    "static/media/Group 9678.png": "/static/media/Group 9678.16c9b17d79cc4d267b95.png",
+    "index.html": "/index.html",
+    "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "main.41d144ce.css.map": "/static/css/main.41d144ce.css.map",
+    "main.93984c1d.js.map": "/static/js/main.93984c1d.js.map",
+    "592.0f886a15.chunk.js.map": "/static/js/592.0f886a15.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.41d144ce.css",
+    "static/js/main.93984c1d.js"
+  ]
+}

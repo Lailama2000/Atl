@@ -7,7 +7,7 @@
   max-height: 400px;
 }
 .custom-textarea::placeholder {
-  color: white;
+  color: rgba(210, 206, 206, 0.726);
   font-size:12px;
 }
 .flag-dropdown{

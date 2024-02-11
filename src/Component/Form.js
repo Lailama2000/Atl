@@ -4,6 +4,7 @@ import PhoneInput from "react-phone-input-2";
 import '../App.css';
 import 'react-phone-input-2/lib/style.css'
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 export default function Form() {
   const [firstName, setFirstName] = useState('');
@@ -12,38 +13,49 @@ export default function Form() {
   const [email, setemail] = useState('');
   const [alerting,setAlerting]= React.useState(false)
   const [message, setMessage] = useState('');
+  const [prephone, setPrePhone] = useState('');
+
   const matches = useMediaQuery('(min-width:686px)');
   const { t } = useTranslation();
+  const handlePhoneChange = (value,country) => {
+    setPhone(value);
+    setPrePhone(country.dialCode)
+  };
 
   const handlesend=() =>{
     const formData = new FormData();
     if(firstName && lastName && phone && email && message){
-    formData.append('first_name', firstName);
-    formData.append('last_name', lastName);
+    formData.append('name', firstName + lastName);
+    formData.append('prefix_number', prephone);
     formData.append('phone_number', phone);
+    formData.append('subject', 'test');
     formData.append('email', email);
     formData.append('message', message);
-    // try{
-    // axios.post(`${process.env.REACT_APP_API_URL}contact_form`,formData).then(
-    //   res=>{
-    //     if(res.data.status === true){
-    //       alert('Message Send Successfully')
-    //       setFirstName('')
-    //       setLastName('')
-    //       setPhone('')
-    //       setMessage('')
-    //       setemail('')
-    //     }
-    //   }
-    // )}
-    // catch(error){
-    //   console.log(error)
-    // }}
+  //   for (var pair of formData.entries()) {
+  //     console.log(pair[0]+ ', ' + pair[1]); 
+  // } 
+    try{
+    axios.post(`${process.env.REACT_APP_API_URL}contact-us`,formData).then(
+      res=>{ console.log(res.data)
+        if(res.data.status === true){
+          alert('Message Send Successfully')
+          setFirstName('')
+          setLastName('')
+          setPhone('')
+          setMessage('')
+          setemail('')
+        }
+      }
+    )}
+    catch(error){
+      console.log(error)
+    }
     }
     else{
       setAlerting(true)
     }
   }
+
   const lang = localStorage.getItem('lang');
 
   return (
@@ -55,7 +67,7 @@ export default function Form() {
         <Stack direction={matches ? 'row' : 'column'} gap={2}>
           <Grid>
             <TextField
-              label={t("First Name")}
+              placeholder={t("First Name")}
               value={firstName}
               onChange={(e) => { setFirstName(e.target.value) }}
               InputLabelProps={{
@@ -70,7 +82,7 @@ export default function Form() {
           </Grid>
           <Grid>
             <TextField
-              label={t("Last Name")}
+              placeholder={t("Last Name")}
               value={lastName}
               onChange={(e) => { setLastName(e.target.value) }}
               InputLabelProps={{
@@ -86,21 +98,29 @@ export default function Form() {
 
         <Stack direction={matches ? 'row' : 'column'} gap={2} sx={{ marginTop: '20px' }}>
           <Grid>
-          <PhoneInput
-          country={'jo'}
-          defaultMask='jo'
-            enableSearch={true}
-            value={phone}
-            onChange={setPhone}
-            inputStyle={{backgroundColor:'#7D4896', width: '300px'
-            ,color:'white',fontSize:'13px',border:'1px solid white',
-            borderRadius:'5px',height:'52px',marginTop:'-15px'
-             }}
-          />
+          <div style={{ direction: lang === 'ar' ? 'ltr' : 'ltr' }}>
+      <PhoneInput
+        country={'jo'}
+        enableSearch={true}
+        value={phone}
+        onChange={(value, country) => handlePhoneChange(value, country)}
+        inputStyle={{
+          backgroundColor: '#7D4896',
+          width: '300px',
+          color: 'white',
+          fontSize: '13px',
+          border: '1px solid white',
+          borderRadius: '5px',
+          height: '52px',
+          marginTop: '-15px',
+          direction:'ltr'
+        }}
+      />
+    </div>
           </Grid>
           <Grid>
             <TextField
-              label={t('Email')}
+              placeholder={t('Email')}
               type='email'
               value={email}
               onChange={(e) => { setemail(e.target.value) }}

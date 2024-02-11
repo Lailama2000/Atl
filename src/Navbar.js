@@ -20,6 +20,7 @@ import i18next from "i18next";
 import axios from 'axios';
 import {  Link } from '@mui/material'
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { useNavigate } from 'react-router-dom';
 
 
 function Navbar() {
@@ -50,11 +51,25 @@ function Navbar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (i) => {
-    setAnchorElNav(null);
-    const sectionElement = document.getElementById(i);
+  const navigate = useNavigate()
+const handleCloseNavMenu = (page) => {
+  const mainPagePath = '/';
+  const isMainPage = window.location.pathname === mainPagePath;
+  setAnchorElNav(null);
+  if (!isMainPage) {
+    navigate('/');
+  } 
+  else {
+    const sectionElement = document.getElementById(page);
+    if (sectionElement) {
+      sectionElement.scrollIntoView();
+    }
+  }
+};
+  const handleTouch =() =>{
+    const sectionElement = document.getElementById('contact');
     sectionElement.scrollIntoView();
-  };
+  }
   const handleClose = () => {
     setAnchorElNav(null);
   };
@@ -100,8 +115,8 @@ function Navbar() {
               <img src={logo} alt="...loading" style={{ width: '60px', height: '60px',objectFit:'contain' }} />
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'inline-block', md: 'none' },flexWrap: 'wrap', alignItems: 'center',justifyContent:'center'}}>
+              <Box>
                 <img src={logo} alt="...loading" style={{ width: '40px' }} href="/" />
               </Box>
               <IconButton
@@ -145,13 +160,24 @@ function Navbar() {
                   ml:'0%'
                 }}
               >
-                <FacebookIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+                <Link href={contact.facebook} target="_blank">
+                <FacebookIcon 
+                sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+                </Link>
+                {contact.instagram ?<Link href={contact.instagram} target="_blank">
                 <InstagramIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+                </Link> : null}
+                {contact.linkedin ?
+        <Link href={contact.linkedin} target="_blank">
+        <LinkedInIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+        </Link> : null }
+                {contact.whatsapp ?<Link href={`https://wa.me/${contact.whatsapp}`}  target="_blank">
                 <WhatsAppIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
+                </Link> : null}
                 <a onClick={()=>{setLangMenu(!langMenu)}}>
                 <LanguageIcon sx={{ cursor: 'pointer', color: '#606060', m:'0px' }} /> 
                 </a>
-                <Menu sx={{ mt: '70px',marginLeft:'-60px' ,
+                <Menu sx={{ mt: '-20px',marginLeft:lang==='en'?'-150px':'-10px' ,
                                   display: { xs: 'block', md: 'none' },
 }}
               anchorEl={langMenu}
@@ -197,7 +223,7 @@ function Navbar() {
                   flexWrap: 'wrap',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  gap: matches ? '40px' : '0px', 
+                  gap: matches && lang =='en' ? '45px' :matches && lang === 'ar'?'60px': '0px', 
                 }}
               >
                 {pages.map((page) => (
@@ -227,29 +253,29 @@ function Navbar() {
                     '&:hover':{bgcolor: '#018EA2',
                     color: 'white',},textTransform:'none'
                   }}
+                  onClick={handleTouch}
                 >
                   {t('Get In Touch!')}
                 </Button>
-                <Link href={contact.facebook}>
+                <Link href={contact.facebook} target="_blank">
                 <FacebookIcon 
                 sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
                 </Link>
-                {contact.instagram ?<Link href={contact.instagram}>
+                {contact.instagram ?<Link href={contact.instagram} target="_blank">
                 <InstagramIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
                 </Link> : null}
                 {contact.linkedin ?
-        <Link href={contact.linkedin}>
+        <Link href={contact.linkedin} target="_blank">
         <LinkedInIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
         </Link> : null }
-                {contact.whatsapp ?<Link href={contact.instagram}>
+                {contact.whatsapp ?<Link href={`https://wa.me/${contact.whatsapp}`}  target="_blank">
                 <WhatsAppIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
                 </Link> : null}
-
 
                 <a onClick={()=>{setLangMenu(!langMenu)}}>
                 <LanguageIcon sx={{ cursor: 'pointer', color: '#606060', m:'0px' }} /> 
                 </a>
-                <Menu sx={{ mt: '50px',marginLeft:dir==='ltr'?'-60px':'-85%'
+                <Menu sx={{ mt: '-3vh',marginLeft:dir==='ltr'?'-30vh':'-135vh'
                 ,display:{xs:'none',md:'flex'} }}
               anchorEl={langMenu}
               anchorOrigin={{

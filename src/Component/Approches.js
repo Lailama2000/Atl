@@ -5,16 +5,21 @@ import pic2 from '../Media/Group 9674.png'
 import pic3 from '../Media/Group 9675.png'
 import pic4 from '../Media/Group 9676.png'
 import pic5 from '../Media/Group 9673.png'
+import { useTranslation } from 'react-i18next';
 
 export default function Approches() {
+    const { t } = useTranslation();
+
   return (
-    <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center'}}>
+    <div id={t('Our Services')} 
+    style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center'}}>
         <Stack gap={1} sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center'}}>
       <Typography sx={{fontSize:'40px',fontWeight:'bold',color:'#7D4896',marginTop:'50px'}}>
-      The 5 Approaches 
+      {t('The 5 Approaches')} 
+      <br/>      {t('Of Learning')}
+
       </Typography>
       <Typography sx={{fontSize:'40px',fontWeight:'bold',color:'#7D4896',marginBottom:'50px'}}>
-      Of Learning
       </Typography>
 
       <Stack direction='row' gap={7}
@@ -25,7 +30,7 @@ export default function Approches() {
                 <img src={pic1} style={{width:'70px',height:'70px'}}/>
             </Box>
             <Typography sx={{fontSize:'20px',fontWeight:'bold',color:'#7D4896'}}>
-            Communication
+            {t('Communication')}
             </Typography>
         </Stack>
 
@@ -34,7 +39,7 @@ export default function Approches() {
                 <img src={pic2} style={{width:'70px',height:'70px'}}/>
             </Box>
             <Typography sx={{fontSize:'20px',fontWeight:'bold',color:'#7D4896'}}>
-            Research
+            {t('Research')}
             </Typography>
         </Stack>
 
@@ -43,7 +48,7 @@ export default function Approches() {
                 <img src={pic3} style={{width:'70px',height:'70px'}}/>
             </Box>
             <Typography sx={{fontSize:'20px',fontWeight:'bold',color:'#7D4896'}}>
-            Social
+            {t('Social')}
             </Typography>
         </Stack>
 
@@ -52,7 +57,7 @@ export default function Approches() {
                 <img src={pic4} style={{width:'70px',height:'70px'}}/>
             </Box>
             <Typography sx={{fontSize:'20px',fontWeight:'bold',color:'#7D4896'}}>
-            Thinking
+            {t('Thinking')}
             </Typography>
         </Stack>
 
@@ -62,7 +67,7 @@ export default function Approches() {
                 <img src={pic5} style={{width:'70px',height:'70px'}}/>
             </Box>
             <Typography sx={{fontSize:'20px',fontWeight:'bold',color:'#7D4896'}}>
-            Self-Management
+            {t('Self-Management')}
             </Typography>
         </Stack>
       </Stack>
