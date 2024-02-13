@@ -15,7 +15,7 @@ export default function Form() {
   const [message, setMessage] = useState('');
   const [prephone, setPrePhone] = useState('');
 
-  const matches = useMediaQuery('(min-width:686px)');
+  const matches = useMediaQuery('(min-width:879px)');
   const { t } = useTranslation();
   const handlePhoneChange = (value,country) => {
     setPhone(value);
@@ -60,7 +60,8 @@ export default function Form() {
 
   return (
     <div style={{backgroundColor:'white',marginTop:matches?'90px':'10px' }}>
-        <Typography sx={{ color: '#7D4896', fontSize: '25px', fontWeight: 'bolder' ,marginBottom:'40px'}}>{t('Got more questions?')}
+        <Typography sx={{ color: '#7D4896', fontSize: '35px', fontWeight: 'bolder' ,marginBottom:'40px'}}>
+          {t('Got more questions?')}
         <br />
           {t('Drop us a message!')}
  </Typography>
@@ -75,7 +76,7 @@ export default function Form() {
                   color: 'white'
                 }
               }}
-              sx={{borderRadius:'5px', width: '300px', border: '1px solid white', 
+              sx={{borderRadius:'5px', width: matches?'420px':'310px', border: '1px solid white', 
               bgcolor:'#7D4896',
               '&:focus': { border: '1px solid white' },'.MuiInputBase-input':{color:"white"} }}
             />
@@ -90,7 +91,7 @@ export default function Form() {
                   color: 'white' 
                 }
               }}
-              sx={{borderRadius:'5px', width: '300px', border: '1px solid white', bgcolor:'#7D4896',
+              sx={{borderRadius:'5px', width: matches?'420px':'310px', border: '1px solid white', bgcolor:'#7D4896',
               '&:hover': { border: '1px solid white' },'.MuiInputBase-input':{color:"white"} }}
             />
           </Grid>
@@ -100,18 +101,18 @@ export default function Form() {
           <Grid>
           <div style={{ direction: lang === 'ar' ? 'ltr' : 'ltr' }}>
       <PhoneInput
-        country={'jo'}
+        country={"jo"}
         enableSearch={true}
         value={phone}
         onChange={(value, country) => handlePhoneChange(value, country)}
         inputStyle={{
           backgroundColor: '#7D4896',
-          width: '300px',
+          width: matches?'420px':'310px',
           color: 'white',
           fontSize: '13px',
           border: '1px solid white',
           borderRadius: '5px',
-          height: '52px',
+          height: '58px',
           marginTop: '-15px',
           direction:'ltr'
         }}
@@ -129,7 +130,7 @@ export default function Form() {
                   color: 'white' 
                 }
               }}
-              sx={{ borderRadius:'5px',width: '300px', bgcolor:'#7D4896',
+              sx={{ borderRadius:'5px',width: matches?'420px':'310px', bgcolor:'#7D4896',
               border: '1px solid white', '&:hover': { border: '1px solid white' } ,'.MuiInputBase-input':{color:"white"}}}
             />
           </Grid>
@@ -140,12 +141,11 @@ export default function Form() {
         name="message"
         placeholder={t('Message')}
         value={message}
-        cols={matches ? 97 : 46}
         className="custom-textarea"
-        style={{ resize: 'none', overflow: 'auto', height:'100px' }}
+        style={{ resize: 'none', overflow: 'auto', height:'100px',width:matches?'98%':'91%' }}
         />
         </Grid>
-        {alerting && <Alert  severity="error" sx={{width:'300px', marginTop: '20px'}}>One of the Feilds is empty</Alert>}
+        {alerting && <Alert  severity="error" sx={{width:matches?'420px':'310px', marginTop: '20px'}}>One of the Feilds is empty</Alert>}
         <Button onClick={handlesend} sx={{
             bgcolor:'#018EA2',color:'white',padding:'10px',width:'150px',marginBottom:'40px',marginTop:'20px',
             '&:hover':{bgcolor:'#018EA2',color:'white'},fontSize:'16px',textTransform:'none'

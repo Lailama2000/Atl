@@ -14,10 +14,12 @@ import Preferences from '../Component/Preferences';
 import DoneIcon from '@mui/icons-material/Done';
 import Success from '../Component/Success';
 import { useTranslation } from 'react-i18next';
+import LoadingPage from '../Component/LoadingPage';
 
 const steps = ['Personal Information', 'Career Information', 'Preferences'];
 
 export default function FormPage() {
+  const { t } = useTranslation();
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
@@ -25,13 +27,12 @@ export default function FormPage() {
     const [birthday, setBirthday] = useState('');
     const [email, setEmail] = useState('');
     const [selectedGender, setselectedGender] = useState('');
-    const [gender,setgender] = useState(['female','male'])
+    const [gender,setgender] = useState([t('Female'),t('Male')])
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [completed, setCompleted] = React.useState({});
     const [alerting, setAlerting] = React.useState(false);
     const [checked, setChecked] = useState(false);
-    const { t } = useTranslation();
 
     const [experiance, setExperiance] = useState('');
     const [position, setPosition] = useState('');
@@ -49,6 +50,7 @@ export default function FormPage() {
     const [area, setArea] = useState([]);
     const [selectedarea, setSelectedArea] = useState([]);
     const [open, setOpen] = useState(false);
+    const [load, setLoad] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0,0)
@@ -124,15 +126,19 @@ export default function FormPage() {
     };
     
     const handleFinish =() =>{
-        if(selectedarea.length === 0 ){
-            setAlerting(true)
-        }
-        if(selectedarea.length > 0){
       const formData = new FormData();
+      if(selectedarea.length === 0){
+        setAlerting(true)
+      }
+      if(selectedarea.length > 0 ){
+      setLoad(true)
       formData.append('first_name', name);
       formData.append('last_name', lastName);
       formData.append('birthday', birthday);
-      formData.append('gender', selectedGender);
+      if(selectedGender === 'Female'){
+      formData.append('gender', 'female');}
+      if(selectedGender === 'Male'){
+        formData.append('gender', 'male');}
       formData.append('prefix_number', '+' + prephone);
       formData.append('phone_number', phone);
       formData.append('current_position', position);
@@ -156,17 +162,23 @@ export default function FormPage() {
         formData.append('from_time[]', timeSlots[i].from);
         formData.append('to_time[]', timeSlots[i].to);
       }
-    axios.post(`${process.env.REACT_APP_API_URL}teacher-form`,formData).then(res=>{
-      console.log(res.data)
+    axios.post(`${process.env.REACT_APP_API_URL}teacher-form`,formData, {
+      headers: {
+        Accept: 'application/json',
+      },
+    }).then(res=>{
       if(res.data.status === true){
+        setLoad(false)
         setOpen(true)
+        console.log(res.data)
       }
     })
 }
     }
-
   return (
     <div style={{marginTop:'90px'}}>
+       {load && <LoadingPage open={load} />}
+      {!load && <>
       <img src={pic} style={{width:'100%',height:'500px',objectFit:'cover'}}/>
       <div>
         <Container maxWidth='md' >
@@ -195,12 +207,6 @@ export default function FormPage() {
           <Step key={label} completed={completed[index]}>
             <StepLabel
               {...labelProps}
-              sx={{
-                alignItems: 'start',
-                justifyContent: 'start',
-                display: 'flex',
-                flexWrap: 'wrap',
-              }}
               StepIconComponent={(stepIconProps) => (
                 <StyledStepIcon active={stepIconProps.active}>
                   {activeStep - 1 === index ? <DoneIcon /> : stepIconProps.icon}
@@ -259,7 +265,7 @@ export default function FormPage() {
           </React.Fragment>
         )}
       </Box>
-    </div>
+    </div></>}
     <Success open={open} setOpen={setOpen} t={t}/>
     </div>
   )

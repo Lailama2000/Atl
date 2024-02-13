@@ -24,35 +24,38 @@ export default function Footer() {
           gap={matches ? 15 : 2}
           sx={{display:'flex',flexWrap:'wrap',justifyContent:'center',alignItems:'center'}}
         >
-          <img src={logo} style={{ height: '50px', width: '50px', objectFit: 'contain' }} />
+          <img src={logo} style={{ height: '50px', width: '50px', objectFit: 'contain', cursor:'pointer' }}
+          onClick={()=>{navigate('/')}} />
 
           <Typography variant="body2" sx={{ fontSize: '15px' }}>
             {t('CopyRight 2023, All Rights Reserved')}
           </Typography>
 
           <Typography variant="body2" sx={{ fontSize: '15px' }}>
-            <Link
-              onClick={() => {
-                navigate('/privacypolicy');
-              }}
-              sx={{ color: 'white', fontSize: '15px', textDecoration: 'underline', cursor: 'pointer' }}
-            >
-              {t("Privacy Policy")}
-            </Link>
+          <Link
+                onClick={(event) => {
+                  event.preventDefault();
+                  window.open('#/privacypolicy', '_blank');
+                }}
+                sx={{ color: 'white', fontSize: '15px', textDecoration: 'underline', cursor: 'pointer' }}
+              >
+                {t("Privacy Policy")}
+              </Link>
             {" "} | {" "}
             <Link
-              onClick={() => {
-                navigate('/terms');
-              }}
-              sx={{ color: 'white', fontSize: '15px', textDecoration: 'underline', cursor: 'pointer' }}
-            >
-              {t("Terms and Conditions")}
-            </Link>
+                onClick={(event) => {
+                  event.preventDefault();
+                  window.open('#/terms', '_blank');
+                }}
+                sx={{ color: 'white', fontSize: '15px', textDecoration: 'underline', cursor: 'pointer' }}
+              >
+                {t("Terms and Conditions")}
+              </Link>
           </Typography>
 
           <Typography variant="body2" sx={{ fontSize: '15px' }}>
             {t("Powered By")}{' '}
-            <Link
+            <Link target="_blank"
               href="https://smartedge.me"
               sx={{ color: 'white', fontSize: '15px', textDecoration: 'none', fontWeight: 'bold' }}
             >

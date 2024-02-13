@@ -19,7 +19,7 @@ useEffect(()=>{
 },[])
   return (
     <div style={{marginTop:'30px'}}>
-       <Stack direction={matches?'row':'column'} gap={9}>
+       <Stack direction={matches?'row':'column'} gap={matche?17:7}>
          <Grid sx={{display:'flex',flexDirection:'column'}}>
          <label style={{color:'#707070' , marginBottom:'10px'}}>
             {t("Experience in Years")}
@@ -33,7 +33,7 @@ useEffect(()=>{
                   color: '#7D4896'
                 }
               }}
-              sx={{width:  matche?'55vh':'200px',
+              sx={{width:  matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             />
@@ -52,7 +52,7 @@ useEffect(()=>{
                   color: '#7D4896'
                 }
               }}
-              sx={{width:  matche?'55vh':'200px',
+              sx={{width:  matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             />
@@ -60,7 +60,7 @@ useEffect(()=>{
           </Stack>
 
 
-          <Stack direction={matches?'row':'column'} gap={9} sx={{marginTop:'20px'}}>
+          <Stack direction={matches?'row':'column'} gap={matche?17:7} sx={{marginTop:'20px'}}>
          <Grid sx={{display:'flex',flexDirection:'column'}}>
          <label style={{color:'#707070' , marginBottom:'10px'}}>
             {t("Current School")}
@@ -73,7 +73,7 @@ useEffect(()=>{
                   color: '#7D4896'
                 }
               }}
-              sx={{width:  matche?'55vh':'200px',
+              sx={{width:  matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             />
@@ -94,7 +94,7 @@ useEffect(()=>{
                   color: '#7D4896'
                 }
               }}
-              sx={{width:  matche?'55vh':'200px',
+              sx={{width:  matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             >
@@ -108,7 +108,7 @@ useEffect(()=>{
           </Stack>
 
 
-          <Stack direction={matches?'row':'column'} gap={9} sx={{marginTop:'20px'}}>
+          <Stack direction={matches?'row':'column'} gap={matche?17:7} sx={{marginTop:'20px'}}>
             
 
           <Grid sx={{display:'flex',flexDirection:'column'}}>
@@ -125,7 +125,7 @@ useEffect(()=>{
                   color: '#7D4896'
                 }
               }}
-              sx={{width:  matche?'55vh':'200px',
+              sx={{width:  matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             >
@@ -151,7 +151,7 @@ useEffect(()=>{
                   color: '#7D4896'
                 }
               }}
-              sx={{width:  matche?'55vh':'200px',
+              sx={{width:  matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             > {material.map((c) => (

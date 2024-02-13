@@ -10,7 +10,6 @@ import FAQs from '../Component/FAQs';
 import Blogs from '../Component/Blogs';
 import axios from 'axios';
 import LoadingPage from '../Component/LoadingPage';
-
 export default function MainPage({navbarHeight}) {
     const lang = localStorage.getItem('lang')
     const matches = useMediaQuery('(min-width:800px)');
@@ -47,7 +46,8 @@ export default function MainPage({navbarHeight}) {
       <Blogs News={News}/>
       <FAQs questions={questions} setQuestions={setQuestions}/>
        <Stack sx={{backgroundColor:'white'}} id='Contact Us'>
-        <Stack direction={matches ? 'row' : 'column'} gap={10} sx={{display:'flex',flexWrap:'wrap',justifyContent:'center',alignItems:'center'}}>
+        <Stack direction={matches ? 'row' : 'column'} 
+         sx={{display:'flex',flexWrap:'wrap',justifyContent:'center',alignItems:'center',gap:'10%'}}>
       <Form />
       <ContactInfo contact={contact}/>
       </Stack>

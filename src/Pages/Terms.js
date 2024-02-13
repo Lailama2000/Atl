@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import pic from '../Media/Terms.png'
-import { Typography } from '@mui/material'
+import { Typography, useMediaQuery } from '@mui/material'
 import axios from 'axios';
 import LoadingPage from '../Component/LoadingPage';
 
@@ -15,15 +15,22 @@ export default function Terms({navbarHeight}) {
       setOpen(false)
     });
   }, []);
+  const matches = useMediaQuery('(min-width:718px)');
+
   return (
     <>
         {open && <LoadingPage open={open}/>}
         {!open && <>
-    <div style={{backgroundImage: `url(${pic})`,backgroundSize: 'cover',height:'500px'
-    ,marginTop:`${navbarHeight}px`}}>  
-        </div>
-                    <div style={{marginTop:'50px',display:'flex',flexWrap:'wrap',marginBottom:'30px'
-                    ,justifyContent:'center',alignItems:'center'}}>
+          <img src={pic} style={{width:'100%',
+          height:matches?'500px':'380px',objectFit:matches?'cover':'contain'}}/>
+                    <div  style={{
+          marginTop: matches?'50px':'',
+          display: 'flex',
+          flexWrap: 'wrap',
+          marginBottom: matches?'30px':'140px',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
                       <Typography sx={{fontSize:'20px',color:'#888888'}}
                       dangerouslySetInnerHTML={{ __html: Terms }}                                             >
                       </Typography>

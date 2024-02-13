@@ -1,6 +1,6 @@
 {
     "Home": "الرئيسية",
-    "What ATL?": "ما هو ATL؟",
+    "Why ATL?": "ما هو ATL؟",
     "Our Services": "خدماتنا",
     "Become a Tutor": "كن مدرسًا",
     "FAQs": "أسئلة شائعة",
@@ -19,7 +19,7 @@
     "Last Name":"الاسم الأخير",
     "Message":"الرسالة",
     "Send":"إرسال",
-    "ATL Different?": "هل ATL مختلفة؟",
+    "ATL Different?": "ATL مختلفة؟",
     "What makes": "ما الذي يجعل",
     "Of Learning": "للتعلم",
     "The 5 Approaches": "النهج الخمسة",
@@ -31,7 +31,7 @@
     "Ready to share your expertise and inspire students? Become a tutor with ATL Education today! Fill out our simple form to join our team of dedicated educators and help shape the future of learning.": "هل أنت مستعد لمشاركة خبراتك وإلهام الطلاب؟ انضم إلى فريق مدرسينا المتفانيين وساهم في صناعة مستقبل التعلم كمدرس في ATL Education اليوم! قم بملء نموذجنا البسيط للانضمام إلى فريقنا والمساهمة في تشكيل مستقبل التعلم.",
     "Fill the form in seconds!": "املأ النموذج في ثوانٍ!",
     "Read more": "اقرأ المزيد",
-    "The ATL Blogs": "مدونات ATL",
+    "The ATL Blog": "مدونات ATL",
     "Terms and Conditions": "الشروط والأحكام",
     "Submit": "تأكيد",
     "Next": "التالي",
@@ -42,7 +42,7 @@
     "Birthdate": "تاريخ الميلاد",
     "Terms & Conditions": "الشروط والأحكام",
     "And The": "و",
-    "I Agree The": "أوافق على",
+    "I Agree To The": "أوافق على",
     "Experience in Years": "الخبرة بالسنوات",
     "Current Position": "المنصب الحالي",
     "Current School": "المدرسة الحالية",
@@ -60,5 +60,10 @@
     "Tuesday": "الثلاثاء",
     "Wednesday": "الأربعاء",
     "Sunday": "الأحد",
-    "Thursday": "الخميس"
+    "Thursday": "الخميس",
+    "English":"إنكليزي",
+    "Arabic":"عربي",
+    "Female":"أنثى",
+    "Male":"ذكر",
+    "More Articles":"المزيد من المقالات"
 }

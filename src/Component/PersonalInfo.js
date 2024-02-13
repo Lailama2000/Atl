@@ -19,6 +19,7 @@ export default function PersonalInfo({name,setName,gender,selectedGender,setsele
         localStorage.setItem('phone', value);
         setPrePhone(country.dialCode)
       };
+
   return (
     <div style={{marginTop:'30px'}}>
         <Stack direction={matches?'row':'column'} gap={matche?17:7}>
@@ -34,7 +35,7 @@ export default function PersonalInfo({name,setName,gender,selectedGender,setsele
                   color: '#7D4896'
                 }
               }}
-              sx={{width: matche?'50vh':'200px',
+              sx={{width: matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             />
@@ -53,7 +54,7 @@ export default function PersonalInfo({name,setName,gender,selectedGender,setsele
                   color: '#7D4896'
                 }
               }}
-              sx={{width: matche?'50vh':'200px',
+              sx={{width: matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             />
@@ -75,7 +76,7 @@ export default function PersonalInfo({name,setName,gender,selectedGender,setsele
                   color: '#7D4896'
                 }
               }}
-              sx={{width: matche?'50vh':'200px',
+              sx={{width: matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}>
             {gender.map((c) => (
@@ -100,7 +101,7 @@ export default function PersonalInfo({name,setName,gender,selectedGender,setsele
                   color: '#7D4896'
                 }
               }}
-              sx={{width: matche?'50vh':'200px',
+              sx={{width: matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             inputProps={{
@@ -116,13 +117,13 @@ export default function PersonalInfo({name,setName,gender,selectedGender,setsele
             {t("Phone Number")}
             </label>
             <PhoneInput
-            country={'jo'}
-            enableSearch={true}
-            value={phone}
+        country={"jo"}
+        enableSearch={true}
+        value={phone}
             onChange={(value,country) => handlePhoneChange(value,country)}
             style={{direction:'ltr'}}
             inputStyle={{
-                width: matches ? '50vh' : '200px',
+                width: matche ? '59vh' : '200px',
                 height: '38px',
                 color: 'black',
                 fontSize: '13px',
@@ -147,7 +148,7 @@ export default function PersonalInfo({name,setName,gender,selectedGender,setsele
                   color: '#7D4896'
                 }
               }}
-              sx={{width: matche?'50vh':'200px',
+              sx={{width: matche?'59vh':'200px',
               '.MuiInputBase-root':{color:"black",height:'40px',border: '1.2px solid #7D4896'} 
             }}
             />
@@ -157,7 +158,7 @@ export default function PersonalInfo({name,setName,gender,selectedGender,setsele
           <CheckBoxesComp 
             label={
                 <span style={{fontSize:'13px'}}>
-                {t('I Agree The')} 
+                {t('I Agree To The')} 
                 {' '}
                 <a href="#/terms" target="_blank" style={{color:'#707070',textDecoration:'none',fontWeight:'bold'}}>{t('Terms & Conditions')}</a>
                 {' '}

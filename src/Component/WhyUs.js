@@ -5,19 +5,20 @@ import pic2 from '../Media/Group 9660.png';
 import { useTranslation } from 'react-i18next';
 
 export default function WhyUs({whyUs}) {
-  const matches = useMediaQuery('(min-width:711px)');
+  const matches = useMediaQuery('(min-width:751px)');
   const lang = localStorage.getItem('lang');
   const { t } = useTranslation();
 
   return (
-    <div id={t('What ATL?')}
-    style={{ backgroundColor: '#7D4896', position: 'relative', minHeight: '550px',height:whyUs.length > 3 ?'':'650px' }}>
-      <Stack sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', alignItems: 'start', padding: '50px' }}>
+    <div id={t('Why ATL?')}
+    style={{ backgroundColor: '#7D4896', position: 'relative', minHeight: '550px'}}>
+      <Stack sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', alignItems: 'start', paddingLeft: matches && lang ==='en'?'90px':matches && lang ==='ar'?'60px':'10px',paddingTop:'90px',
+     paddingRight: matches && lang ==='ar'?'90px':'60px' }}>
         <Typography sx={{ color: '#F5C660', fontSize: '40px', fontWeight: 'bold', marginBottom: '40px' }}>
           {t('What makes')} <br />
           {t('ATL Different?')}
         </Typography>
-        <img
+        {matches && <img
           src={pic}
           style={{
             height: '550px',
@@ -29,7 +30,7 @@ export default function WhyUs({whyUs}) {
             transform: lang ==='ar' ? 'scaleX(-1)' : '',
           }}
         />
-
+}
         {whyUs.map((whyUs, index) => (
           <Stack direction="row" gap={2} sx={{ marginLeft: index % 2 === 0 ? '' : 
           matches && lang === 'en'? '80px' : '', marginRight:index % 2 === 0 ? '' : 
@@ -63,8 +64,9 @@ export default function WhyUs({whyUs}) {
                   marginBottom: '60px',
                   zIndex: 1,
                 }}
-                dangerouslySetInnerHTML={{ __html: whyUs.discription }}
+                dangerouslySetInnerHTML={{ __html: whyUs.description }}
               ></Typography>
+              
             </Stack>
           </Stack>
         ))}

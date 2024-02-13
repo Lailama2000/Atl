@@ -32,7 +32,7 @@ function Navbar() {
   const { t , i18n } = useTranslation();
   const dir = i18n.dir();
   document.body.dir = i18n.dir();
-  const pages = [t('Home'), t('What ATL?'), t('Our Services'), t('Become a Tutor'), t('FAQs')];
+  const pages = [t('Home'), t('Why ATL?'), t('Our Services'), t('Become a Tutor'), t('FAQs')];
   const lang = localStorage.getItem('lang')
 
   React.useEffect(()=>{
@@ -47,28 +47,29 @@ function Navbar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
   const navigate = useNavigate()
-const handleCloseNavMenu = (page) => {
-  const mainPagePath = '/';
-  const isMainPage = window.location.pathname === mainPagePath;
-  setAnchorElNav(null);
-  if (!isMainPage) {
-    navigate('/');
-  } 
-  else {
-    const sectionElement = document.getElementById(page);
-    if (sectionElement) {
-      sectionElement.scrollIntoView();
+  const handleCloseNavMenu = (page) => {
+    const mainPagePath = '/';
+    const isMainPage = window.location.pathname === mainPagePath;
+    setAnchorElNav(null);
+    if (!isMainPage) {
+      navigate('/');
+    } else {
+      const sectionElement = document.getElementById(page);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        navigate('/');
+        setTimeout(() => {
+          const sectionElement = document.getElementById(page);
+          sectionElement.scrollIntoView({ behavior: 'smooth' });
+        }, 5000);
+      }
     }
-  }
-};
+  };
   const handleTouch =() =>{
     const sectionElement = document.getElementById('contact');
-    sectionElement.scrollIntoView();
+    sectionElement.scrollIntoView({ behavior: 'smooth' });
   }
   const handleClose = () => {
     setAnchorElNav(null);
@@ -96,7 +97,7 @@ const handleCloseNavMenu = (page) => {
   return (
     <>
       <AppBar sx={{ backgroundColor: 'white', padding: '10px' ,position:'fixed',height:'90px'}}>
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Toolbar>
             <Typography
               variant="h6"
@@ -115,10 +116,20 @@ const handleCloseNavMenu = (page) => {
               <img src={logo} alt="...loading" style={{ width: '60px', height: '60px',objectFit:'contain' }} />
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'inline-block', md: 'none' },flexWrap: 'wrap', alignItems: 'center',justifyContent:'center'}}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' },flexDirection:'row',flexWrap: 'wrap', alignItems: 'center',justifyContent:'center'}}>
               <Box>
-                <img src={logo} alt="...loading" style={{ width: '40px' }} href="/" />
+                <img src={logo} alt="...loading" style={{ width: '40px' }} onClick={()=>{navigate('/')}}/>
               </Box>
+
+              <div  style={{
+                  display: 'flex',
+                  flexDirection:'column',
+                  flexWrap:'wrap',
+                  alignItems:'end',
+                  flexGrow: 1,
+                  justifyContent: 'end',
+                  color:'black'
+                }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -153,13 +164,13 @@ const handleCloseNavMenu = (page) => {
                 open={Boolean(anchorElNav)}
                 onClose={handleClose}
                 sx={{
-                  display: { xs: 'block', md: 'none' },
+                  display: { xs: 'flex', md: 'none' },
                   flexWrap:'wrap',
-                  justifyContent:'end',
-                  alignItems:'end',
-                  ml:'0%'
+                  justifyContent:'center',
+                  alignItems:'center',
                 }}
               >
+                
                 <Link href={contact.facebook} target="_blank">
                 <FacebookIcon 
                 sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
@@ -177,7 +188,7 @@ const handleCloseNavMenu = (page) => {
                 <a onClick={()=>{setLangMenu(!langMenu)}}>
                 <LanguageIcon sx={{ cursor: 'pointer', color: '#606060', m:'0px' }} /> 
                 </a>
-                <Menu sx={{ mt: '-20px',marginLeft:lang==='en'?'-150px':'-10px' ,
+                <Menu sx={{ mt: '10px',marginLeft:lang==='en'?'-40px':'-255px' ,
                                   display: { xs: 'block', md: 'none' },
 }}
               anchorEl={langMenu}
@@ -202,11 +213,14 @@ const handleCloseNavMenu = (page) => {
               </MenuItem>
         </Menu>
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                  <MenuItem key={page} sx={{textTransform:'none'}} onClick={() => handleCloseNavMenu(page)}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
+              </div>
+
+
             </Box>
             <Box
               sx={{
@@ -223,7 +237,7 @@ const handleCloseNavMenu = (page) => {
                   flexWrap: 'wrap',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  gap: matches && lang =='en' ? '45px' :matches && lang === 'ar'?'60px': '0px', 
+                  gap: matches && lang =='en' ? '35px' :matches && lang === 'ar'?'50px': '0px', 
                 }}
               >
                 {pages.map((page) => (
@@ -236,9 +250,9 @@ const handleCloseNavMenu = (page) => {
                       my: 2,
                       color: '#606060',
                       display: 'block',
-                      fontSize: '10px',
+                      fontSize: '15px',
                       position: 'relative',
-                      overflow: 'hidden',
+                      overflow: 'hidden',textTransform:'none'
                     }}
                   >
                     {page}
@@ -249,9 +263,10 @@ const handleCloseNavMenu = (page) => {
                     bgcolor: '#018EA2',
                     color: 'white',
                     borderRadius: '20px',
-                    marginLeft: '40px',
+                    paddingLeft:'20px',paddingRight:'20px',
+                    marginLeft: '40px',textTransform:'none',
                     '&:hover':{bgcolor: '#018EA2',
-                    color: 'white',},textTransform:'none'
+                    color: 'white',}
                   }}
                   onClick={handleTouch}
                 >
@@ -272,11 +287,12 @@ const handleCloseNavMenu = (page) => {
                 <WhatsAppIcon sx={{ cursor: 'pointer', color: '#018EA2', m:'0px' }} /> 
                 </Link> : null}
 
+
+      <div style={{display: { xs: 'none', md: 'block' },flexWrap:'wrap',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
                 <a onClick={()=>{setLangMenu(!langMenu)}}>
                 <LanguageIcon sx={{ cursor: 'pointer', color: '#606060', m:'0px' }} /> 
                 </a>
-                <Menu sx={{ mt: '-3vh',marginLeft:dir==='ltr'?'-30vh':'-135vh'
-                ,display:{xs:'none',md:'flex'} }}
+                <Menu
               anchorEl={langMenu}
               anchorOrigin={{
                 vertical: 'top',
@@ -287,6 +303,7 @@ const handleCloseNavMenu = (page) => {
                 vertical: 'top',
                 horizontal: 'right',
               }}
+              sx={{display: { xs: 'none', md: 'block' },marginLeft:matches && lang === 'en'?'-20vh':'-170vh',marginTop:'-2%'}}
               open={Boolean(langMenu)}
               onClose={handleCloseLangMenu}>
             <MenuItem>
@@ -298,6 +315,8 @@ const handleCloseNavMenu = (page) => {
               onClick={() =>{ handleAr() }}>{t('Arabic')}</Button>
               </MenuItem>
         </Menu>
+        </div>
+
               </Box>
             </Box>
           </Toolbar>

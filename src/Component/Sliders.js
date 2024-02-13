@@ -98,7 +98,7 @@ import { useTranslation } from 'react-i18next';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 export default function Sliders({ slider }) {
-  const matches = useMediaQuery('(min-width:375px)');
+  const matches = useMediaQuery('(min-width:700px)');
   const lang = localStorage.getItem('lang');
   const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
   const { t } = useTranslation();
@@ -120,7 +120,8 @@ export default function Sliders({ slider }) {
           margin: '0 5px',
           cursor: 'pointer',
           transform: lang === 'ar' ? 'scaleX(-1)' : '',
-          marginTop:'-5%'
+          marginTop:matches?'-10vh':'0px',
+          marginBottom:matches?'':'20px'
         }}
         onClick={() => handleSlideChange(index)}
       />
@@ -130,7 +131,7 @@ export default function Sliders({ slider }) {
   return (
     <div id={t('Home')}>
       <AutoPlaySwipeableViews
-        interval={3000}
+        interval={5000}
         enableMouseEvents
         onChangeIndex={handleSlideChange}
         index={selectedSlideIndex}
@@ -138,14 +139,10 @@ export default function Sliders({ slider }) {
         {slider.map((slide, index) => (
           <div key={index}>
             <Stack
-              direction="row"
-              gap={20}
+              direction={matches?"row":'column'}
+              gap="%"
               sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '10px',
+                padding: matches?'80px':'20px',
               }}
             >
               <Stack sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', alignItems: 'start' }}>
@@ -172,22 +169,26 @@ export default function Sliders({ slider }) {
                     </React.Fragment>
                   ))}
                 </Typography>
-                <Button
-                  sx={{
-                    bgcolor: '#018EA2',
-                    color: 'white',
-                    width: '200px',
-                    marginTop: '20px',
-                    '&:hover': { bgcolor: '#018EA2', color: 'white' },
-                  }}
-                  href={slide.action}
-                >
-                  {slide.button_text}
-                </Button>
+                {slide.button_text && (
+              <Button
+                sx={{
+                  bgcolor: '#018EA2',
+                  color: 'white',
+                  width: '240px',
+                  marginTop: '20px',
+                  marginBottom: matches ? '20px' : '40px',
+                  '&:hover': { bgcolor: '#018EA2', color: 'white' },
+                }}
+                target="_blank" 
+                href={`https://${slide.action}`}
+              >
+                {slide.button_text}
+              </Button>
+            )}
               </Stack>
               <img
                 src={slide.image}
-                style={{ objectFit: 'fill', width: matches ? '350px' : '300px', height: '350px',
+                style={{ objectFit: 'fill', width: matches ? '350px' : '250px', height: matches?'350px':'250px',
                  borderRadius: '20px' }}
               />
             </Stack>

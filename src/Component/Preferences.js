@@ -10,17 +10,23 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
       useEffect(()=>{      
           window.scrollTo(0,0)
       },[])
-    const handleCheckboxChange = (day) => {
+      const handleCheckboxChange = (e, day) => {
         if (selectedDays.includes(day)) {
           setSelectedDays(selectedDays.filter((d) => d !== day));
           setTimeSlots(timeSlots.filter((slot) => slot.day !== day));
         } else {
           setSelectedDays([...selectedDays, day]);
+      
+          setTimeSlots((prevTimeSlots) => {
+            const updatedTimeSlots = [...prevTimeSlots];
+            updatedTimeSlots.push({ day, from: '12:00', to: '12:00' }); 
+            return updatedTimeSlots;
+          });
         }
       };
+
       const handleTimeChange = (event, day) => {
         const { name, value } = event.target;
-    
         setTimeSlots((prevTimeSlots) => {
           const updatedTimeSlots = [...prevTimeSlots];
           const index = updatedTimeSlots.findIndex((slot) => slot.day === day);
@@ -30,11 +36,10 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
           } else {
             updatedTimeSlots.push({ day, [name]: value });
           }
-    
           return updatedTimeSlots;
         });
-      };
-  return (
+      }
+      return (
     <div style={{marginTop:'30px'}}>
        <Grid sx={{display:'flex',flexDirection:'column'}}>
          <label style={{color:'#018EA2' , marginBottom:'10px'}}>
@@ -70,54 +75,54 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
             {t("Availability")}
             </label>
             <Stack gap={8} >
-            <Stack direction='row' gap={5} sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', alignItems: 'start' }}>
-            <Checkbox
-              sx={{
-                color: '#7D4896',
-                '&.Mui-checked': {
-                  color: '#7D4896',
-                },
-              }}
-            checked={selectedDays.includes('Saturday')}
-            onChange={() => handleCheckboxChange('Saturday')}
-          />
-                <Typography sx={{ color: '#707070', fontSize: '15px' }}>
-                {t('Saturday')}
-                </Typography>
-                {matches && <Divider sx={{ width: '60px', height: '1px', marginTop: '10px', backgroundColor: '#018EA2' }} />}
-                {selectedDays.includes('Saturday') && (
-            <>
-              <Typography sx={{ color: '#707070', fontSize: '15px' }}>
-                {t('From')}
-              </Typography>
-              <TextField
-                defaultValue="12:00"
-                type='time'
-                sx={{
-                  width: '200px',
-                  '.MuiInputBase-root': { color: "#7D4896", height: '40px', border: '1.2px solid #018EA2' }
-                }}
-                onChange={(event) => handleTimeChange(event, 'Saturday')}
-                name="from"
-              />
-              <Typography sx={{ color: '#707070', fontSize: '15px' }}>
-                {t('To')}
-              </Typography>
-              <TextField
-                defaultValue="12:00"
-                type='time'
-                sx={{
-                  width: '200px',
-                  '.MuiInputBase-root': { color: "#7D4896", height: '40px', border: '1.2px solid #018EA2' }
-                }}
-                onChange={(event) => handleTimeChange(event, 'Saturday')}
-                name="to"
-              />
-            </>
-          )}
-            </Stack>
+            <Stack direction={matches ? 'row' : 'column'} gap={5} sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', alignItems: 'start' }}>
+    <Checkbox
+      sx={{
+        color: '#7D4896',
+        '&.Mui-checked': {
+          color: '#7D4896',
+        },
+      }}
+      checked={selectedDays.includes('Saturday')}
+      onChange={(e) => handleCheckboxChange(e, 'Saturday')}
+    />
+    <Typography sx={{ color: '#707070', fontSize: '15px', width: '30px' }}>
+      {t('Saturday')}
+    </Typography>
+    {matches && <Divider sx={{ width: '60px', marginLeft: '20px', height: '1px', marginTop: '10px', backgroundColor: '#018EA2' }} />}
 
-            <Stack direction='row' gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
+    <Typography sx={{ color: '#707070', fontSize: '15px' }}>
+      {t('From')}
+    </Typography>
+    <TextField
+      disabled={!selectedDays.includes('Saturday')}
+      defaultValue="12:00" 
+      type="time"
+      sx={{
+        width: '200px',
+        '.MuiInputBase-root': { color: '#7D4896', height: '40px', border: '1.2px solid #018EA2' },
+      }}
+      onChange={(event) => handleTimeChange(event, 'Saturday')}
+      name="from"
+    />
+    <Typography sx={{ color: '#707070', fontSize: '15px' }}>
+      {t('To')}
+    </Typography>
+    <TextField
+      disabled={!selectedDays.includes('Saturday')}
+      defaultValue="12:00" 
+      type="time"
+      sx={{
+        width: '200px',
+        '.MuiInputBase-root': { color: '#7D4896', height: '40px', border: '1.2px solid #018EA2' },
+      }}
+      onChange={(event) => handleTimeChange(event, 'Saturday')}
+      name="to"
+    />
+  </Stack>
+
+
+            <Stack direction={matches?'row':'column'} gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
             <Checkbox
               sx={{
                 color: '#7D4896',
@@ -126,20 +131,19 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 },
               }}
             checked={selectedDays.includes('Sunday')}
-            onChange={() => handleCheckboxChange('Sunday')}
+            onChange={(e) => handleCheckboxChange(e,'Sunday')}
           />
-                <Typography sx={{color:'#707070',fontSize:'15px'}}>
+                <Typography sx={{color:'#707070',fontSize:'15px',width:'30px'}}>
                 {t('Sunday')}
                 </Typography>
-                {matches && <Divider sx={{width:'60px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
-                {selectedDays.includes('Sunday') && (
-            <>
+                {matches && <Divider sx={{width:'60px',marginLeft:'20px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
               <Typography sx={{ color: '#707070', fontSize: '15px' }}>
               {t('From')}
 
               </Typography>
               <TextField
-                defaultValue="12:00"
+                disabled ={!selectedDays.includes("Sunday")}
+      defaultValue="12:00" 
                 type='time'
                 sx={{
                   width: '200px',
@@ -153,8 +157,9 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
 
               </Typography>
               <TextField
-                defaultValue="12:00"
+                 disabled ={!selectedDays.includes("Sunday")}
                 type='time'
+      defaultValue="12:00" 
                 sx={{
                   width: '200px',
                   '.MuiInputBase-root': { color: "#7D4896", height: '40px', border: '1.2px solid #018EA2' }
@@ -162,12 +167,11 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 onChange={(event) => handleTimeChange(event, 'Sunday')}
                 name="to"
               />
-            </>
-          )}
+        
             </Stack>
 
 
-            <Stack direction='row' gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
+            <Stack direction={matches?'row':'column'} gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
             <Checkbox
               sx={{
                 color: '#7D4896',
@@ -176,20 +180,19 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 },
               }}
             checked={selectedDays.includes('Monday')}
-            onChange={() => handleCheckboxChange('Monday')}
+            onChange={(e) => handleCheckboxChange(e,'Monday')}
           />
-                <Typography sx={{color:'#707070',fontSize:'15px'}}>
+                <Typography sx={{color:'#707070',fontSize:'15px',width:'30px'}}>
                 {t('Monday')}
                 </Typography>
-                {matches && <Divider sx={{width:'60px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
-                {selectedDays.includes('Monday') && (
-            <>
+                {matches && <Divider sx={{width:'60px',marginLeft:'20px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
               <Typography sx={{ color: '#707070', fontSize: '15px' }}>
               {t('From')}
 
               </Typography>
               <TextField
-                defaultValue="12:00"
+                              disabled ={!selectedDays.includes("Monday")}
+                defaultValue="00:00"
                 type='time'
                 sx={{
                   width: '200px',
@@ -203,7 +206,8 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
 
               </Typography>
               <TextField
-                defaultValue="12:00"
+                              disabled ={!selectedDays.includes("Monday")}
+                defaultValue="00:00"
                 type='time'
                 sx={{
                   width: '200px',
@@ -212,11 +216,11 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 onChange={(event) => handleTimeChange(event, 'Monday')}
                 name="to"
               />
-            </>
-          )}
             </Stack>
 
-            <Stack direction='row' gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
+
+
+            <Stack direction={matches?'row':'column'} gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
             <Checkbox
               sx={{
                 color: '#7D4896',
@@ -225,20 +229,18 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 },
               }}
             checked={selectedDays.includes('Tuesday')}
-            onChange={() => handleCheckboxChange('Tuesday')}
+            onChange={(e) => handleCheckboxChange(e,'Tuesday')}
           />
-                <Typography sx={{color:'#707070',fontSize:'15px'}}>
+                <Typography sx={{color:'#707070',fontSize:'15px',width:'30px'}}>
                 {t('Tuesday')}
                 </Typography>
-                {matches && <Divider sx={{width:'60px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
-                {selectedDays.includes('Tuesday') && (
-            <>
+                {matches && <Divider sx={{width:'60px',marginLeft:'20px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
               <Typography sx={{ color: '#707070', fontSize: '15px' }}>
               {t('From')}
-
               </Typography>
               <TextField
-                defaultValue="12:00"
+                disabled ={!selectedDays.includes("Tuesday")}
+                defaultValue="00:00"
                 type='time'
                 sx={{
                   width: '200px',
@@ -251,7 +253,8 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
               {t('To')}
               </Typography>
               <TextField
-                defaultValue="12:00"
+                disabled ={!selectedDays.includes("Tuesday")}
+                defaultValue="00:00"
                 type='time'
                 sx={{
                   width: '200px',
@@ -260,59 +263,52 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 onChange={(event) => handleTimeChange(event, 'Tuesday')}
                 name="to"
               />
-            </>
-          )}
+        
             </Stack>
 
-            <Stack direction='row' gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
-            <Checkbox
-              sx={{
-                color: '#7D4896',
-                '&.Mui-checked': {
-                  color: '#7D4896',
-                },
-              }}
-            checked={selectedDays.includes('Wednesday')}
-            onChange={() => handleCheckboxChange('Wednesday')}
-          />
-                <Typography sx={{color:'#707070',fontSize:'15px'}}>
-                {t('Wednesday')}
-                </Typography>
-                {matches && <Divider sx={{width:'60px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
-                {selectedDays.includes('Wednesday') && (
-            <>
-              <Typography sx={{ color: '#707070', fontSize: '15px' }}>
-              {t('From')}
-              </Typography>
-              <TextField
-                defaultValue="12:00"
-                type='time'
-                sx={{
-                  width: '200px',
-                  '.MuiInputBase-root': { color: "#7D4896", height: '40px', border: '1.2px solid #018EA2' }
-                }}
-                onChange={(event) => handleTimeChange(event, 'Wednesday')}
-                name="from"
-              />
-              <Typography sx={{ color: '#707070', fontSize: '15px' }}>
-              {t('To')}
 
-              </Typography>
-              <TextField
-                defaultValue="12:00"
-                type='time'
-                sx={{
-                  width: '200px',
-                  '.MuiInputBase-root': { color: "#7D4896", height: '40px', border: '1.2px solid #018EA2' }
-                }}
-                onChange={(event) => handleTimeChange(event, 'Wednesday')}
-                name="to"
-              />
-            </>
-          )}
-            </Stack>
 
-            <Stack direction='row' gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
+            <Stack direction={matches?"row":'column'} gap={5} sx={{ display: "flex", flexWrap: "wrap", justifyContent: "start",
+             alignItems: "start" }}>
+  <Checkbox
+    sx={{
+      color: "#7D4896",
+      "&.Mui-checked": {
+        color: "#7D4896",
+      },
+    }}
+    checked={selectedDays.includes("Wednesday")}
+    onChange={(e) => handleCheckboxChange(e,"Wednesday")}
+  />
+  <Typography sx={{ color: "#707070", fontSize: "15px",width:'30px' }}>{t("Wednesday")}</Typography>
+  {matches && <Divider sx={{ width: "50px",marginLeft:'20px', height: "1px", marginTop: "10px", backgroundColor: "#018EA2" }} />}
+      <Typography sx={{ color: "#707070", fontSize: "15px" }}>{t("From")}</Typography>
+      <TextField
+      disabled ={!selectedDays.includes("Wednesday")}
+        defaultValue="00:00" 
+        type="time"
+        sx={{
+          width: "200px",
+          ".MuiInputBase-root": { color: "#7D4896", height: "40px", border: "1.2px solid #018EA2" },
+        }}
+        onChange={(event) => handleTimeChange(event, "Wednesday")}
+        name="from"
+      />
+      <Typography sx={{ color: "#707070", fontSize: "15px" }}>{t("To")}</Typography>
+      <TextField
+        disabled ={!selectedDays.includes("Wednesday")}
+        defaultValue="00:00" 
+        type="time"
+        sx={{
+          width: "200px",
+          ".MuiInputBase-root": { color: "#7D4896", height: "40px", border: "1.2px solid #018EA2" },
+        }}
+        onChange={(event) => handleTimeChange(event, "Wednesday")}
+        name="to"
+      />
+</Stack>
+
+            <Stack direction={matches?'row':'column'} gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
             <Checkbox
               sx={{
                 color: '#7D4896',
@@ -321,20 +317,20 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 },
               }}
             checked={selectedDays.includes('Thursday')}
-            onChange={() => handleCheckboxChange('Thursday')}
+            onChange={(e) => handleCheckboxChange(e,'Thursday')}
           />
-                <Typography sx={{color:'#707070',fontSize:'15px'}}>
+                <Typography sx={{color:'#707070',fontSize:'15px',width:'30px'}}>
                 {t('Thursday')}
                 </Typography>
-                {matches && <Divider sx={{width:'60px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
-                {selectedDays.includes('Thursday') && (
-            <>
+                {matches && <Divider sx={{width:'60px',marginLeft:'20px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
+                
               <Typography sx={{ color: '#707070', fontSize: '15px' }}>
               {t('From')}
 
               </Typography>
               <TextField
-                defaultValue="12:00"
+                disabled ={!selectedDays.includes("Thursday")}
+                defaultValue="00:00"
                 type='time'
                 sx={{
                   width: '200px',
@@ -347,8 +343,9 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
               {t('To')}
 
               </Typography>
-              <TextField
-                defaultValue="12:00"
+              <TextField               
+               disabled ={!selectedDays.includes("Thursday")}
+                defaultValue="00:00"
                 type='time'
                 sx={{
                   width: '200px',
@@ -357,11 +354,11 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 onChange={(event) => handleTimeChange(event, 'Thursday')}
                 name="to"
               />
-            </>
-          )}
+          
+          
             </Stack>
 
-            <Stack direction='row' gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
+            <Stack direction={matches?'row':'column'} gap={5} sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start'}}>
             <Checkbox
               sx={{
                 color: '#7D4896',
@@ -370,20 +367,20 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 },
               }}
             checked={selectedDays.includes('Friday')}
-            onChange={() => handleCheckboxChange('Friday')}
+            onChange={(e) => handleCheckboxChange(e,'Friday')}
           />
-                <Typography sx={{color:'#707070',fontSize:'15px'}}>
+                <Typography sx={{color:'#707070',fontSize:'15px',width:'30px'}}>
                 {t('Friday')}
                 </Typography>
-                {matches && <Divider sx={{width:'60px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
-                {selectedDays.includes('Friday') && (
-            <>
+                {matches && <Divider sx={{width:'60px',marginLeft:'20px',height:'1px',marginTop:'10px' , backgroundColor:'#018EA2'}}/>}
+              
               <Typography sx={{ color: '#707070', fontSize: '15px' }}>
               {t('From')}
 
               </Typography>
               <TextField
-                defaultValue="12:00"
+                 disabled ={!selectedDays.includes("Friday")}
+                defaultValue="00:00"
                 type='time'
                 sx={{
                   width: '200px',
@@ -397,7 +394,8 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
 
               </Typography>
               <TextField
-                defaultValue="12:00"
+                disabled ={!selectedDays.includes("Friday")}
+                defaultValue="00:00"
                 type='time'
                 sx={{
                   width: '200px',
@@ -406,8 +404,6 @@ export default function Preferences({selectedarea,setSelectedArea,area,selectedD
                 onChange={(event) => handleTimeChange(event, 'Friday')}
                 name="to"
               />
-            </>
-          )}
             </Stack>
 
 

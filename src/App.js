@@ -13,13 +13,18 @@ import BlogDetails from './Pages/BlogDetails';
 function App() {
   const theme = createTheme({
     typography: {
-      fontFamily: 'arial',
+      fontFamily: '',
     },
     Button:{
-      fontFamily: 'arial',
+      fontFamily: '',
     }
   });
- 
+  const lang = localStorage.getItem('lang')
+  useEffect(()=>{
+    if(!lang){
+      localStorage.setItem('lang','en')
+    }
+  },[])
   const navbarHeight = 60;
   return (
     <div>
