@@ -180,7 +180,7 @@ export default function Sliders({ slider }) {
                   '&:hover': { bgcolor: '#018EA2', color: 'white' },
                 }}
                 target="_blank" 
-                href={`https://${slide.action}`}
+                href={slide.action}
               >
                 {slide.button_text}
               </Button>

@@ -37,12 +37,12 @@ export default function BlogDetails() {
             {data.blog_details.date}
         </Typography>
         </div>
-      <img src={data.blog_details.image} style={{height:'420px',width:matches?'150vh':'100%',top:'40vh',position:'absolute',
+      <img src={data.blog_details.image} style={{height:'420px',width:matches?'150vh':'100%',top:matches?'40vh':'50vh',position:'absolute',
       marginLeft:lang === 'en'&&matches ? '30vh':'0px',objectFit:'cover',marginRight:lang === 'ar'&&matches  ? '30vh':'0px'}}/>
       <Container maxWidth='lg' sx={{display:'flex',flexWrap:'wrap',justifyContent:'start',alignItems:'start',}}>
         <Stack sx={{paddingLeft:lang==='en'?'40px':'',paddingRight:lang==='ar'?'40px':''}}>
-      <Typography sx={{marginBottom:'50px',color:'#888888',marginTop:'210px',fontSize:'16px'}}>
-        {data.blog_details.description}
+      <Typography sx={{marginBottom:'50px',color:'#888888',marginTop:matches?'210px':'300px',fontSize:'16px'}}
+      dangerouslySetInnerHTML={{ __html: data.blog_details.description }}>
       </Typography>
 
       <Typography sx={{marginBottom:'20px',color:'#7D4896',fontWeight:'bold'}}>
@@ -58,7 +58,7 @@ export default function BlogDetails() {
            <div
   style={{
     position: 'absolute',
-    bottom: '5px',
+    bottom: '2px',
     width: '230px',
     height: '40px',
     backgroundImage: 'linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0))',

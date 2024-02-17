@@ -32,7 +32,7 @@ function Navbar() {
   const { t , i18n } = useTranslation();
   const dir = i18n.dir();
   document.body.dir = i18n.dir();
-  const pages = [t('Home'), t('Why ATL?'), t('Our Services'), t('Become a Tutor'), t('FAQs')];
+  const pages = [t('Home'), t('Why ATL?'), t('Learning Approaches'), t('Become a Tutor'),t('Blog'), t('FAQs')];
   const lang = localStorage.getItem('lang')
 
   React.useEffect(()=>{
@@ -57,7 +57,9 @@ function Navbar() {
     } else {
       const sectionElement = document.getElementById(page);
       if (sectionElement) {
-        sectionElement.scrollIntoView({ behavior: 'smooth' });
+          const headerHeight = 90; 
+          const sectionOffset = sectionElement.offsetTop - headerHeight;
+          window.scrollTo({ top: sectionOffset, behavior: 'smooth' });
       } else {
         navigate('/');
         setTimeout(() => {
@@ -69,7 +71,9 @@ function Navbar() {
   };
   const handleTouch =() =>{
     const sectionElement = document.getElementById('contact');
-    sectionElement.scrollIntoView({ behavior: 'smooth' });
+    const headerHeight = 180; 
+    const sectionOffset = sectionElement.offsetTop - headerHeight;
+    window.scrollTo({ top: sectionOffset, behavior: 'smooth' });
   }
   const handleClose = () => {
     setAnchorElNav(null);
@@ -101,16 +105,11 @@ function Navbar() {
           <Toolbar>
             <Typography
               variant="h6"
-              noWrap
               component="a"
               href="/"
               sx={{
-                mr: 2,
+                mr:2,
                 display: { xs: 'none', md: 'flex' },
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
               }}
             >
               <img src={logo} alt="...loading" style={{ width: '60px', height: '60px',objectFit:'contain' }} />
@@ -237,7 +236,7 @@ function Navbar() {
                   flexWrap: 'wrap',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  gap: matches && lang =='en' ? '35px' :matches && lang === 'ar'?'50px': '0px', 
+                  gap: matches && lang =='en' ? '21px' :matches && lang === 'ar'?'30px': '0px', 
                 }}
               >
                 {pages.map((page) => (

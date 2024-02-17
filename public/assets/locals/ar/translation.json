@@ -1,7 +1,7 @@
 {
     "Home": "الرئيسية",
-    "Why ATL?": "ما هو ATL؟",
-    "Our Services": "خدماتنا",
+    "Why ATL?": "لماذا ATL؟",
+    "Learning Approaches": "مناهج التعلم",
     "Become a Tutor": "كن مدرسًا",
     "FAQs": "أسئلة شائعة",
     "Get In Touch!":"تواصل معنا",
@@ -65,5 +65,6 @@
     "Arabic":"عربي",
     "Female":"أنثى",
     "Male":"ذكر",
-    "More Articles":"المزيد من المقالات"
+    "More Articles":"المزيد من المقالات",
+    "Blog":"المدونة"
 }

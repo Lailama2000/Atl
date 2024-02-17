@@ -12,7 +12,7 @@ export default function Approches() {
     const matches = useMediaQuery('(min-width:400px)');
 
   return (
-    <div id={t('Our Services')} 
+    <div id={t('Learning Approaches')} 
     style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center'}}>
         <Stack gap={1} sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center'}}>
             <Container style={{display: 'flex', flexWrap: 'wrap',flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>

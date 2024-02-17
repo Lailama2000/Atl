@@ -24,7 +24,7 @@ export default function Blogs({ News }) {
   };
 
   return (
-    <div style={{ backgroundColor: '#F1F1F1',position:'relative'}}>
+    <div style={{ backgroundColor: '#F1F1F1',position:'relative'}} id={t('Blog')}>
       <Typography
         sx={{
           fontWeight: 'bold',
@@ -62,7 +62,7 @@ export default function Blogs({ News }) {
       >
         <div>
           {News.map((c) => (
-            <SwiperSlide style={{ backgroundColor: '#F1F1F1',position:'relative', padding: '0px' }}>
+            <SwiperSlide style={{ backgroundColor: '#F1F1F1',position:'relative', padding: matches?'0px':'5px' }}>
               <Card
                 key={c.id}
                 sx={{ width: matches?'320px':'300px', borderRadius: '10px', minHeight: '450px', marginBottom: '50px' }}

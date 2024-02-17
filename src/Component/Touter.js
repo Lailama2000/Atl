@@ -34,7 +34,7 @@ export default function Touter() {
 
       </Stack>
     <img src={pic} style={{height:matches?'320px':'250px',width:matches?'320px':'250px',objectFit:'fill'
-    ,paddingRight:matches?'1%':'',marginTop:matches?'':'40px'}}/>
+    ,paddingRight:matches?'1%':'',marginTop:matches?'':'40px',paddingLeft:matches?'':'70px'}}/>
       </Stack>
     </div>
   )

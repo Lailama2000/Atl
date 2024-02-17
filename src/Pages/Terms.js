@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import pic from '../Media/Terms.png'
-import { Typography, useMediaQuery } from '@mui/material'
+import { Container, Typography, useMediaQuery } from '@mui/material'
 import axios from 'axios';
 import LoadingPage from '../Component/LoadingPage';
 
@@ -31,9 +31,11 @@ export default function Terms({navbarHeight}) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
+          <Container maxWidth='lg'>
                       <Typography sx={{fontSize:'20px',color:'#888888'}}
                       dangerouslySetInnerHTML={{ __html: Terms }}                                             >
                       </Typography>
+                      </Container>
                     </div> </>}
                     </>
   )
